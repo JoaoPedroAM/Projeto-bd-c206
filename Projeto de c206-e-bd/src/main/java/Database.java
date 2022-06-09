@@ -13,7 +13,7 @@ public class Database {
     PreparedStatement pst;
 
     static final String user = "root";
-    static final String password = "root";
+    static final String password = "91479691aA!";
     static final String database = "Projeto";
 
     //String para conexão do banco de dados
@@ -27,23 +27,21 @@ public class Database {
             System.out.println("Conexão concluida: " + connection);
 
         }catch (SQLException e){
-            System.out.println("ERRO DE CONEXÃO" + e.getMessage());
+            System.out.println("ERRO DE CONEXÃO: " + e.getMessage());
         }
     }
 
     public boolean insertPokemon(Pokemon pokemon){
         connect();
-        String sql = "INSERT INTO Pokemon(id, nome, tipo , atk, def, vida, lvl, shiny) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Pokemon(id, nome, tipo , lvl, shiny, possui) VALUES(?, ?, ?, ?, ?, ?)";
         try {
             pst = connection.prepareStatement(sql);
             pst.setInt(1,pokemon.getId());      // concatena nome na primeira ? do comando
             pst.setString(2,pokemon.getNome());
-            pst.setString(3,pokemon.getTipo());   // concatena nome na segunda ? do comando
-            pst.setInt(4,pokemon.getAtk());
-            pst.setInt(5,pokemon.getDef());
-            pst.setInt(6,pokemon.getVida());
-            pst.setInt(7,pokemon.getLvl());
-            pst.setBoolean(8,pokemon.isShiny());
+            pst.setString(3,pokemon.getTipo());   // concatena nome na segunda ? do comando;
+            pst.setInt(4,pokemon.getLvl());
+            pst.setBoolean(5,pokemon.isShiny());
+            pst.setBoolean(6,pokemon.isPossui());
             pst.execute();                           // executa o comando
             check = true;
         } catch (SQLException e) {
@@ -70,15 +68,12 @@ public class Database {
             statement = connection.createStatement();
             result = statement.executeQuery(sql);
             while(result.next()){
-                Pokemon pokemonTemp = new Pokemon(result.getInt("id"), result.getString("nome"), result.getString("tipo"),result.getInt("atk"),result.getInt("def"),result.getInt("vida"),result.getInt("lvl"),result.getBoolean("shiny"),result.getBoolean("possui")) {
+                Pokemon pokemonTemp = new Pokemon(result.getInt("id"), result.getString("nome"), result.getString("tipo"),result.getInt("lvl"),result.getBoolean("shiny"),result.getBoolean("possui")) {
                 };
                 pokemonTemp.setId(result.getInt("id"));
                 System.out.println("ID = " + pokemonTemp.getId());
                 System.out.println("NOME = " + pokemonTemp.getNome());
                 System.out.println("TIPO = " + pokemonTemp.getTipo());
-                System.out.println("ATAQUE = " + pokemonTemp.getAtk());
-                System.out.println("DEFESA = " + pokemonTemp.getDef());
-                System.out.println("VIDA = " + pokemonTemp.getVida());
                 System.out.println("LEVEL = " + pokemonTemp.getLvl());
                 if (pokemonTemp.isShiny()) {
                     System.out.println("O POKEMON É SHINY PARABENS ");
@@ -110,15 +105,12 @@ public class Database {
             statement = connection.createStatement();
             result = statement.executeQuery(sql);
             while(result.next()){
-                Pokemon pokemonTemp = new Pokemon(result.getInt("id"), result.getString("nome"), result.getString("tipo"),result.getInt("atk"),result.getInt("def"),result.getInt("vida"),result.getInt("lvl"),result.getBoolean("shiny"),result.getBoolean("possui")) {
+                Pokemon pokemonTemp = new Pokemon(result.getInt("id"), result.getString("nome"), result.getString("tipo"),result.getInt("lvl"),result.getBoolean("shiny"),result.getBoolean("possui")) {
                 };
                 pokemonTemp.setId(result.getInt("id"));
                 System.out.println("ID = " + pokemonTemp.getId());
                 System.out.println("NOME = " + pokemonTemp.getNome());
                 System.out.println("TIPO = " + pokemonTemp.getTipo());
-                System.out.println("ATAQUE = " + pokemonTemp.getAtk());
-                System.out.println("DEFESA = " + pokemonTemp.getDef());
-                System.out.println("VIDA = " + pokemonTemp.getVida());
                 System.out.println("LEVEL = " + pokemonTemp.getLvl());
                 if (pokemonTemp.isShiny()) {
                     System.out.println("O POKEMON É SHINY PARABENS ");
@@ -142,7 +134,7 @@ public class Database {
     }
 
     // ----------------------------ATUALIZANDO NOME NO REGISTRO----------------------------
-    public boolean updateUser(int id, String nome){
+    public boolean updatePokemon(int id, String nome){
         connect();
         String sql = "UPDATE usuario SET nome=? WHERE id=?";
         try{
@@ -166,9 +158,9 @@ public class Database {
     }
 
     // ----------------------------EXCLUINDO REGISTRO----------------------------
-    public boolean deleteUser(int id) {
+    public boolean deletePokemon(int id) {
         connect();
-        String sql = "DELETE FROM usuario WHERE id=?";
+        String sql = "DELETE FROM pokemon WHERE id=?";
         try{
             pst = connection.prepareStatement(sql);
             pst.setInt(1, id);
@@ -190,4 +182,4 @@ public class Database {
 }
 
 
-}
+

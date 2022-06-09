@@ -1,6 +1,6 @@
 package pokemon;
 
-public class Capturados extends Pokemon {
+public class Capturados {
 
     private void mostraInfo(){
 
