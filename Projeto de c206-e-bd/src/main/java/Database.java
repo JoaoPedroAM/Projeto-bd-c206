@@ -1,5 +1,7 @@
 
+
 import pokemon.Pokemon;
+import pokemon.treinador.Treinador;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -96,7 +98,7 @@ public class Database {
         return pokemons;
     }
 
-    // ----------------------------BUSCANDO REGISTRO PELO CPF----------------------------
+    // ----------------------------BUSCANDO REGISTRO PELO POSSUI----------------------------
     public ArrayList<Pokemon> researchPokemonPossui(boolean possui){
         connect();
         ArrayList<Pokemon> pokemons = new ArrayList<>();
@@ -179,6 +181,36 @@ public class Database {
         }
         return check;
     }
+    // ----------------------------BUSCANDO TREINADORES ----------------------------
+    public ArrayList<pokemon.treinador.Treinador> researchTreinador(){
+        connect();
+        ArrayList<pokemon.treinador.Treinador> treinador = new ArrayList<>();
+        String sql = "SELECT * FROM treinador";
+        try{
+            statement = connection.createStatement();
+            result = statement.executeQuery(sql);
+            while(result.next()){
+                Treinador treinadorTemp = new Treinador(result.getInt("idtreinador"), result.getString("nome")) {
+                };
+                treinadorTemp.setIdtreinador(result.getInt("idtreinador"));
+                System.out.println("ID = " + treinadorTemp.getIdtreinador());
+                System.out.println("NOME = " + treinadorTemp.getNome());
+                treinador.add(treinadorTemp);
+            }
+        }catch (SQLException e){
+            System.out.println("Erro de operação: " + e.getMessage());
+        }finally {
+            try {
+                connection.close();
+                statement.close();
+                result.close();
+            }catch (SQLException e){
+                System.out.println("Erro ao fechar a conexão: " + e.getMessage());
+            }
+        }
+        return treinador;
+    }
+
 }
 
 
