@@ -5,6 +5,7 @@ import pokemon.treinador.GeradorPokemon;
 import java.util.Random;
 
 public abstract class Local implements GeradorPokemon {
+    protected int idlocal;
     protected String nome;
 
     public void randomizaLevel(){

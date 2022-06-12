@@ -1,8 +1,40 @@
-import pokemon.Pokemon;
-import pokemon.lugares.Local;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        Database database = new Database();
+        database.connect();
+
+        boolean flagCadastro;
+        while (flagCadastro = true){
+            int aux;
+            System.out.println("Selecione a opcao desejada: ");
+            System.out.println("1 - Entrar com uma conta ja cadastrada");
+            System.out.println("2 - Cadastrar uma nova conta");
+            System.out.println("------>");
+            aux  = sc.nextInt();
+
+            switch (aux){
+                case 1:
+
+
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
 //        Database database = new Database();
 //        database.connect();
 //
@@ -21,16 +53,6 @@ public class Main {
 //        database.researchPokemon();
 //
 //        database.researchPokemonPossui(true);
-
-        
-
-
-
-
-
-
-
-
 
 
     }

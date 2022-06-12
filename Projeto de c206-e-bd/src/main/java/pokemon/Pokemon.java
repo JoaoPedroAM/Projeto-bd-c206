@@ -3,8 +3,6 @@ package pokemon;
 import lombok.Data;
 import pokemon.treinador.GeradorPokemon;
 
-import java.util.Random;
-
 @Data
 public class Pokemon implements GeradorPokemon {
 
@@ -18,7 +16,7 @@ public class Pokemon implements GeradorPokemon {
     protected boolean possui;
 
 
-    public Pokemon(int id, String nome, String tipo,int lvl, boolean shiny, boolean possui) {
+    public Pokemon(int id, String nome, String tipo, int lvl, boolean shiny, boolean possui) {
         this.id = id;
         this.nome = nome;
         this.tipo = tipo;
