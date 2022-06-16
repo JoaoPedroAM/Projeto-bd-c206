@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Porjeto-bd-c206" />
+        <module name="Projeto de c206-e-bd" />
       </profile>
     </annotationProcessing>
   </component>
