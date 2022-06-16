@@ -21,7 +21,7 @@ public abstract class Connection {
     public void connect(){
         try {
             connection = DriverManager.getConnection(url,user,password);
-            System.out.println("Conexão concluida: " + connection);
+            //System.out.println("Conexão concluida: " + connection);
 
         }catch (SQLException e){
             System.out.println("ERRO DE CONEXÃO: " + e.getMessage());

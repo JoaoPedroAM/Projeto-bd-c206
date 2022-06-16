@@ -44,6 +44,8 @@ public class Local {
         return level;
     }
 
+    //GEETERS E SETTERS
+
     public int getIdlocal() {
         return idlocal;
     }
