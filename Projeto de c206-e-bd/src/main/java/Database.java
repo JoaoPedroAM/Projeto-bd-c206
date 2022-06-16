@@ -1,5 +1,5 @@
-
 import pokemon.Pokemon;
+import pokemon.treinador.Treinador;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ public class Database {
     PreparedStatement pst;
 
     static final String user = "root";
-    static final String password = "91479691aA!";
+    static final String password = "Lfcf210102";
     static final String database = "Projeto";
 
     //String para conexão do banco de dados
@@ -31,9 +31,12 @@ public class Database {
         }
     }
 
-    public boolean insertPokemon(Pokemon pokemon){
+
+
+    // ---------------------------- INSERINDO POKEMON ----------------------------
+    public boolean insertCidade(Pokemon pokemon){
         connect();
-        String sql = "INSERT INTO Pokemon(id, nome, tipo , lvl, shiny, possui) VALUES(?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Pokemon(idpokemon, nome, tipo , lvl, shiny, possui, local_idlocal) VALUES(?, ?, ?, ?, ?, ?, ?)";
         try {
             pst = connection.prepareStatement(sql);
             pst.setInt(1,pokemon.getId());      // concatena nome na primeira ? do comando
@@ -42,6 +45,7 @@ public class Database {
             pst.setInt(4,pokemon.getLvl());
             pst.setBoolean(5,pokemon.isShiny());
             pst.setBoolean(6,pokemon.isPossui());
+            pst.setInt(7,pokemon.getLocal_idlocal());
             pst.execute();                           // executa o comando
             check = true;
         } catch (SQLException e) {
@@ -59,6 +63,8 @@ public class Database {
         return check;
     }
 
+
+
     // ----------------------------BUSCANDO TODOS REGISTROS----------------------------
     public ArrayList<Pokemon> researchPokemon(){
         connect();
@@ -68,7 +74,7 @@ public class Database {
             statement = connection.createStatement();
             result = statement.executeQuery(sql);
             while(result.next()){
-                Pokemon pokemonTemp = new Pokemon(result.getInt("id"), result.getString("nome"), result.getString("tipo"),result.getInt("lvl"),result.getBoolean("shiny"),result.getBoolean("possui")) {
+                Pokemon pokemonTemp = new Pokemon(result.getInt("id"), result.getString("nome"), result.getString("tipo"),result.getInt("lvl"),result.getBoolean("shiny"),result.getBoolean("possui"), result.getInt("local_idlocal")) {
                 };
                 pokemonTemp.setId(result.getInt("id"));
                 System.out.println("ID = " + pokemonTemp.getId());
@@ -96,18 +102,18 @@ public class Database {
         return pokemons;
     }
 
-    // ----------------------------BUSCANDO REGISTRO PELO CPF----------------------------
+    // ---------------------------- BUSCANDO REGISTRO PELO POSSUI ----------------------------
     public ArrayList<Pokemon> researchPokemonPossui(boolean possui){
         connect();
         ArrayList<Pokemon> pokemons = new ArrayList<>();
-        String sql = "SELECT * FROM Pokemon WHERE possui = true";
+        String sql = "SELECT * FROM Pokemon WHERE possui = " + possui;
         try{
             statement = connection.createStatement();
             result = statement.executeQuery(sql);
             while(result.next()){
-                Pokemon pokemonTemp = new Pokemon(result.getInt("id"), result.getString("nome"), result.getString("tipo"),result.getInt("lvl"),result.getBoolean("shiny"),result.getBoolean("possui")) {
+                Pokemon pokemonTemp = new Pokemon(result.getInt("idpokemon"), result.getString("nome"), result.getString("tipo"),result.getInt("lvl"),result.getBoolean("shiny"),result.getBoolean("possui"),result.getInt("local_idlocal")) {
                 };
-                pokemonTemp.setId(result.getInt("id"));
+                pokemonTemp.setId(result.getInt("idpokemon"));
                 System.out.println("ID = " + pokemonTemp.getId());
                 System.out.println("NOME = " + pokemonTemp.getNome());
                 System.out.println("TIPO = " + pokemonTemp.getTipo());
@@ -179,6 +185,102 @@ public class Database {
         }
         return check;
     }
+
+    // ----------------------------BUSCANDO TREINADORES ----------------------------
+    public ArrayList<pokemon.treinador.Treinador> researchTreinador(){
+        connect();
+        ArrayList<pokemon.treinador.Treinador> treinador = new ArrayList<>();
+        String sql = "SELECT * FROM treinador";
+        try{
+            statement = connection.createStatement();
+            result = statement.executeQuery(sql);
+            while(result.next()){
+                Treinador treinadorTemp = new Treinador(result.getInt("idtreinador"), result.getString("nome")) {
+                };
+                treinadorTemp.setIdtreinador(result.getInt("idtreinador"));
+                System.out.println("ID = " + treinadorTemp.getIdtreinador());
+                System.out.println("NOME = " + treinadorTemp.getNome());
+                System.out.println("------------------------------------");
+                treinador.add(treinadorTemp);
+            }
+        }catch (SQLException e){
+            System.out.println("Erro de operação: " + e.getMessage());
+        }finally {
+            try {
+                connection.close();
+                statement.close();
+                result.close();
+            }catch (SQLException e){
+                System.out.println("Erro ao fechar a conexão: " + e.getMessage());
+            }
+        }
+        return treinador;
+    }
+
+    // ---------------------------- VERIFICANDO ID DO CADASTRO ----------------------------
+    public ArrayList<Treinador> researchTreinadorExistente(int id){
+        connect();
+        ArrayList<Treinador> treinadors = new ArrayList<>();
+        String sql = "SELECT * FROM Treinador WHERE idtreinador = " + id;
+        try{
+            statement = connection.createStatement();
+            result = statement.executeQuery(sql);
+            while(result.next()){
+                Treinador treinadorTemp = new Treinador(result.getInt("idtreinador"), result.getString("nome")) {
+                };
+                treinadorTemp.setIdtreinador(result.getInt("idtreinador"));
+                System.out.println("ID = " + treinadorTemp.getIdtreinador());
+                System.out.println("NOME = " + treinadorTemp.getNome());
+                System.out.println("------------------------------");
+                treinadors.add(treinadorTemp);
+            }
+        }catch (SQLException e){
+            System.out.println("Erro de operação: " + e.getMessage());
+        }finally {
+            try {
+                connection.close();
+                statement.close();
+                result.close();
+            }catch (SQLException e){
+                System.out.println("Erro ao fechar a conexão: " + e.getMessage());
+            }
+        }
+        return treinadors;
+    }
+
+    // ---------------------------- BUSCA DE POKEMONS EM LOCAIS ESPECIFICOS----------------------------
+    public ArrayList<Pokemon> researchPokemonLocal(int idLocal){
+        connect();
+        ArrayList<Pokemon> pokemons = new ArrayList<>();
+        String sql = "SELECT * FROM Pokemon WHERE local_idlocal = " + idLocal;
+        try{
+            statement = connection.createStatement();
+            result = statement.executeQuery(sql);
+            while(result.next()){
+                Pokemon pokemonTemp = new Pokemon(result.getInt("idpokemon"), result.getString("nome"), result.getString("tipo"),result.getInt("lvl"),result.getBoolean("shiny"),result.getBoolean("idLocal"),result.getInt("local_idlocal")) {
+                };
+                pokemonTemp.setId(result.getInt("idpokemon"));
+                System.out.println("ID = " + pokemonTemp.getId());
+                System.out.println("NOME = " + pokemonTemp.getNome());
+                System.out.println("TIPO = " + pokemonTemp.getTipo());
+                System.out.println("------------------------------");
+                pokemons.add(pokemonTemp);
+            }
+        }catch (SQLException e){
+            System.out.println("Erro de operação: " + e.getMessage());
+        }finally {
+            try {
+                connection.close();
+                statement.close();
+                result.close();
+            }catch (SQLException e){
+                System.out.println("Erro ao fechar a conexão: " + e.getMessage());
+            }
+        }
+        return pokemons;
+    }
+
+
 }
 
 
