@@ -1,19 +1,43 @@
 package pokemon.lugares;
-
-import pokemon.treinador.GeradorPokemon;
-
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.Random;
 
-public abstract class Local implements GeradorPokemon {
+public abstract class Local {
     protected int idlocal;
     protected String nome;
 
-    public void randomizaLevel(){
-        Random r = new Random();
-        int low = 1;
-        int high = 100;
-        int result = r.nextInt(high-low) + low;
+
+
+    public static int gerarLvl(){
+        int max = 100;
+        int min = 1;
+        Random random = new Random();
+        int level = random.nextInt(max - min + 1) + min;
+
+
+        return level;
+    }
+
+    public static boolean gerarShiny(){
+        int max = 100;
+        int min = 1;
+        Random random = new Random();
+        int sorte = random.nextInt(max - min + 1) + min;
+        if(sorte == 100){
+            return true;
+        }
+        else
+            return false;
 
     }
+
+    public static int gerarpokemon(int max, int min){
+        Random random = new Random();
+        int level = random.nextInt(max - min + 1) + min;
+        return level;
+    }
+
+
 
 }
