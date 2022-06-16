@@ -185,7 +185,6 @@ public class Database {
         }
         return check;
     }
-
     // ----------------------------BUSCANDO TREINADORES ----------------------------
     public ArrayList<pokemon.treinador.Treinador> researchTreinador(){
         connect();
