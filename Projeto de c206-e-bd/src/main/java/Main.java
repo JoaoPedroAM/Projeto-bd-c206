@@ -1,11 +1,10 @@
-import pokemon.Pokemon;
-
-import static pokemon.lugares.Local.gerarLvl;
-import static pokemon.lugares.Local.gerarShiny;
+import Database.LocalDB;
+import pokemon.lugares.Local;
 
 public class Main {
     public static void main(String[] args) {
 
+        LocalDB localDB = new LocalDB();
 
 //        Scanner sc = new Scanner(System.in);
 //
@@ -34,19 +33,17 @@ public class Main {
 //
 //            }
 //        }
-
-
-
-        Database database = new Database();
-        database.connect();
+        Local n = new Local(4,"ali");
+        localDB.insertCidade(n);
+        localDB.updatePokemon(8,"tete");
 
 
 
 //        Pokemon bulbasaur = new Pokemon(1,"Bulbasaur","Grama",5,false,true);
 //        Pokemon ivysaur = new Pokemon(2,"Ivysaur","Grama",16,false,false);
 
-        Pokemon bulbasaur = new Pokemon(1,"Bulbasaur","Grama",1);
-        Pokemon ivysaur = new Pokemon(2,"Ivysaur","Grama",1);
+//        Pokemon bulbasaur = new Pokemon(1,"Bulbasaur","Grama",1);
+//        Pokemon ivysaur = new Pokemon(2,"Ivysaur","Grama",1);
 
 
 

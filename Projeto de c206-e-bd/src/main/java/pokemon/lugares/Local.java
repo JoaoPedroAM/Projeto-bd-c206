@@ -3,11 +3,17 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-public abstract class Local {
+public class Local {
     protected int idlocal;
     protected String nome;
 
+    public Local(int idlocal, String nome) {
+        this.idlocal = idlocal;
+        this.nome = nome;
+    }
 
+    public Local() {
+    }
 
     public static int gerarLvl(){
         int max = 100;
@@ -38,6 +44,19 @@ public abstract class Local {
         return level;
     }
 
+    public int getIdlocal() {
+        return idlocal;
+    }
 
+    public void setIdlocal(int idlocal) {
+        this.idlocal = idlocal;
+    }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 }
