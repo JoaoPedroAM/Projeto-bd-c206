@@ -70,13 +70,13 @@ CREATE TABLE IF NOT EXISTS `projeto`.`pokemon_da_pokedex` (
   CONSTRAINT `fk_pokedex_has_pokemon_pokedex1`
     FOREIGN KEY (`pokedex_idpokedex`)
     REFERENCES `projeto`.`pokedex` (`idpokedex`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_pokedex_has_pokemon_pokemon1`
     FOREIGN KEY (`pokemon_idpokemon` , `pokemon_local_idlocal`)
     REFERENCES `projeto`.`pokemon` (`idpokemon` , `local_idlocal`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
