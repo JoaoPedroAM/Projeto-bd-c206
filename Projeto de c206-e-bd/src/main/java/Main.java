@@ -25,42 +25,42 @@ public class Main {
         System.out.println("");
 
         while (flagSave) {
-                int auxSave = 0;
-                boolean auxMenu = true;
-                while(auxMenu) {
-                    pokedexDB.buscarPokedex();
-                    System.out.println("1 - Carregar save");
-                    System.out.println("2 - Criar save");
-                    System.out.println("3 - Deletar save");
-                    System.out.println("≠ - Sair do jogo");
-                    auxSave = sc.nextInt();
-                    int auxIDSave;
-                    switch (auxSave) {
-                        case 1:
-                            System.out.println("Selecione o save: ");
+            int auxSave = 0;
+            boolean auxMenu = true;
+            while(auxMenu) {
+                pokedexDB.buscarPokedex();
+                System.out.println("1 - Carregar save");
+                System.out.println("2 - Criar save");
+                System.out.println("3 - Deletar save");
+                System.out.println("≠ - Sair do jogo");
+                auxSave = sc.nextInt();
+                int auxIDSave;
+                switch (auxSave) {
+                    case 1:
+                        System.out.println("Selecione o save: ");
+                        auxMenu = false;
+                        System.out.println("Escolha o save");
+                        save = sc.nextInt();
+                        if (save >= 1 && save <= 3) {
                             auxMenu = false;
                             break;
-                        case 2:
-                            auxIDSave = sc.nextInt();
-                            pokedexDB.criarPokedex(auxIDSave);
-                            break;
-                        case 3:
-                            auxIDSave = sc.nextInt();
-                            pokedexDB.deletarSave(auxIDSave);
-                            break;
-                        default:
-                            break;
-                    }
-
-                System.out.println("------>");
-                save = sc.nextInt();
-                if (save >= 1 && save <= 3) {
-                    break;
-                } else {
-                    System.out.println("Save invalido, tente novamante");
+                        } else {
+                            System.out.println("Save invalido, tente novamante");
+                        }
+                        break;
+                    case 2:
+                        auxIDSave = sc.nextInt();
+                        pokedexDB.criarPokedex(auxIDSave);
+                        break;
+                    case 3:
+                        auxIDSave = sc.nextInt();
+                        pokedexDB.deletarSave(auxIDSave);
+                        break;
+                    default:
+                        break;
                 }
-            }
 
+            }
             boolean flagMenu = true;
             while (flagMenu) {
                 int auxMenu2 = 0;
@@ -157,7 +157,7 @@ public class Main {
                         flagMenu = false;
                         break;
                 }
-                }
+            }
 
 
         }
