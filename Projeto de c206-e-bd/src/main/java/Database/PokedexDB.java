@@ -1,9 +1,7 @@
 package Database;
 
-import pokemon.Pokedex;
-import pokemon.Pokemon;
-import pokemon.PokemonPossuido;
-
+import Pokedex.Pokedex;
+import Pokemon.PokemonPossuido;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;

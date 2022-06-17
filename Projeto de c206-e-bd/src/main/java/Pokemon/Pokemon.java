@@ -1,4 +1,4 @@
-package pokemon;
+package Pokemon;
 
 import lombok.Data;
 

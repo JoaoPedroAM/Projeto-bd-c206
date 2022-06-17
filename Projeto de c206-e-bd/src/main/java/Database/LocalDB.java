@@ -1,6 +1,6 @@
 package Database;
-import pokemon.Pokemon;
-import pokemon.lugares.Local;
+import Pokemon.Pokemon;
+import Cidade.Local;
 
 import java.sql.*;
 import java.util.ArrayList;

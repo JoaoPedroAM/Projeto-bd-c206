@@ -1,10 +1,9 @@
 import Database.LocalDB;
 import Database.PokemonDB;
 import Database.PokedexDB;
-import pokemon.Pokemon;
-import pokemon.PokemonPossuido;
-import pokemon.lugares.Local;
-import java.util.Random;
+import Cidade.Local;
+import Pokemon.Pokemon;
+
 import java.util.Scanner;
 
 public class Main {
@@ -13,6 +12,8 @@ public class Main {
         LocalDB localDB = new LocalDB();
         PokemonDB pokemonDB = new PokemonDB();
         PokedexDB pokedexDB = new PokedexDB();
+
+        funcaoInicial();
 
         int save = 0;
         Scanner sc = new Scanner(System.in);
@@ -31,13 +32,10 @@ public class Main {
                 System.out.println("1 - Carregar save");
                 System.out.println("2 - Criar save");
                 System.out.println("3 - Deletar save");
-                System.out.println("≠ - Sair do jogo");
                 auxSave = sc.nextInt();
                 int auxIDSave;
                 switch (auxSave) {
                     case 1:
-                        System.out.println("Selecione o save: ");
-                        auxMenu = false;
                         System.out.println("Escolha o save");
                         save = sc.nextInt();
                         if (save >= 1 && save <= 3) {
@@ -45,9 +43,11 @@ public class Main {
                             break;
                         } else {
                             System.out.println("Save invalido, tente novamante");
+                            break;
                         }
-                        break;
+
                     case 2:
+                        System.out.println("Digite o ID do save Entre 1 a 10");
                         auxIDSave = sc.nextInt();
                         if(auxIDSave <=0 || auxIDSave > 10){
                             System.out.println("ERRO!!!" +
@@ -58,6 +58,7 @@ public class Main {
                         }
                         break;
                     case 3:
+                        System.out.println("Selecione o save a ser deletado");
                         auxIDSave = sc.nextInt();
                         pokedexDB.deletarSave(auxIDSave);
                         break;
@@ -167,21 +168,21 @@ public class Main {
 
         }
 
-//        Pokemon p1 = new Pokemon(1,"Bulbasaur","Grama",1);
-//        Pokemon p2 = new Pokemon(2,"Ivysaur","Grama",1);
-//
-//        Pokemon p3 = new Pokemon(3,"Venusaur","Grama",2);
-//        Pokemon p4 = new Pokemon(4,"Charmander","Fogo",2);
-//
-//        Pokemon p5 = new Pokemon(5,"Charmeleon","Fogo",3);
-//        Pokemon p6 = new Pokemon(6,"Charizard","Fogo",3);
-//
-//        pokemonDB.criarPokemon(p1);
-//        pokemonDB.criarPokemon(p2);
-//        pokemonDB.criarPokemon(p3);
-//        pokemonDB.criarPokemon(p4);
-//        pokemonDB.criarPokemon(p5);
-//        pokemonDB.criarPokemon(p6);
+        Pokemon p1 = new Pokemon(1,"Bulbasaur","Grama",1);
+        Pokemon p2 = new Pokemon(2,"Ivysaur","Grama",1);
+
+        Pokemon p3 = new Pokemon(3,"Venusaur","Grama",2);
+        Pokemon p4 = new Pokemon(4,"Charmander","Fogo",2);
+
+        Pokemon p5 = new Pokemon(5,"Charmeleon","Fogo",3);
+        Pokemon p6 = new Pokemon(6,"Charizard","Fogo",3);
+
+        pokemonDB.criarPokemon(p1);
+        pokemonDB.criarPokemon(p2);
+        pokemonDB.criarPokemon(p3);
+        pokemonDB.criarPokemon(p4);
+        pokemonDB.criarPokemon(p5);
+        pokemonDB.criarPokemon(p6);
 
 
 //        Local n = new Local(4,"ali");
@@ -235,4 +236,97 @@ public class Main {
         pokedexDB.adcionarPokemon(idPok, lvlPok, shinyPok, save, local);
 
     }
+
+    public static void funcaoInicial(){
+
+
+        LocalDB localDB = new LocalDB();
+        PokemonDB pokemonDB = new PokemonDB();
+        PokedexDB pokedexDB = new PokedexDB();
+
+
+        pokedexDB.criarPokedex(1);
+        pokedexDB.criarPokedex(3);
+        pokedexDB.criarPokedex(2);
+
+
+        Local l1 = new Local(1,"Pallet");
+        Local l2 = new Local(2,"Vermilion");
+        Local l3 = new Local(3,"Lavender");
+
+        localDB.criarCidade(l1);
+        localDB.criarCidade(l2);
+        localDB.criarCidade(l3);
+
+
+
+        Pokemon p1 = new Pokemon(1,"Bulbasaur","Grama",1);
+        Pokemon p2 = new Pokemon(2,"Ivysaur","Grama",1);
+
+        Pokemon p3 = new Pokemon(3,"Venusaur","Grama",1);
+        Pokemon p4 = new Pokemon(4,"Charmander","Fogo",1);
+
+        Pokemon p5 = new Pokemon(5,"Charmeleon","Fogo",1);
+        Pokemon p6 = new Pokemon(6,"Charizard","Fogo",1);
+        Pokemon p7 = new Pokemon(7,"Squirtle","Agua",1);
+        Pokemon p8 = new Pokemon(8,"Wartortle","Agua",1);
+        Pokemon p9 = new Pokemon(9,"Blastoise","Agua",1);
+        Pokemon p10 = new Pokemon(10,"Caterpie","Inseto",1);
+        Pokemon p11= new Pokemon(11,"Metapod","Inseto",2);
+        Pokemon p12 = new Pokemon(12,"Butterfree","Inseto",2);
+        Pokemon p13 = new Pokemon(13,"Weedle","Inseto",2);
+        Pokemon p14 = new Pokemon(14,"Kakuna","Inseto",2);
+        Pokemon p15 = new Pokemon(15,"Beedrill","Inseto",2);
+        Pokemon p16 = new Pokemon(16,"Pidgey ","Voador",2);
+        Pokemon p17 = new Pokemon(17,"Pidgeotto ","Voador",2);
+        Pokemon p18 = new Pokemon(18,"Pidgeot ","Voador",2);
+        Pokemon p19 = new Pokemon(19,"Rattata ","Normal",2);
+        Pokemon p20 = new Pokemon(20,"Raticate ","Normal",2);
+        Pokemon p21 = new Pokemon(21,"Spearow ","Voador",3);
+        Pokemon p22 = new Pokemon(22,"Fearow ","Voador",3);
+        Pokemon p23 = new Pokemon(23,"Ekans ","Veneno",3);
+        Pokemon p24 = new Pokemon(24,"Arbok ","Veneno",3);
+        Pokemon p25 = new Pokemon(25,"Pikachu ","Eletrico",3);
+        Pokemon p26 = new Pokemon(26,"Raichu ","Eletrico",3);
+        Pokemon p27 = new Pokemon(27,"Sandshrew","Terra",3);
+        Pokemon p28 = new Pokemon(28,"Nidoran♀","Poison",3);
+        Pokemon p29 = new Pokemon(29,"Nidorina ","Poison",3);
+        Pokemon p30 = new Pokemon(30,"Nidoqueen ","Poison/Terra",3);
+
+        pokemonDB.criarPokemon(p1);
+        pokemonDB.criarPokemon(p2);
+        pokemonDB.criarPokemon(p3);
+        pokemonDB.criarPokemon(p4);
+        pokemonDB.criarPokemon(p5);
+        pokemonDB.criarPokemon(p6);
+        pokemonDB.criarPokemon(p7);
+        pokemonDB.criarPokemon(p8);
+        pokemonDB.criarPokemon(p9);
+        pokemonDB.criarPokemon(p10);
+        pokemonDB.criarPokemon(p11);
+        pokemonDB.criarPokemon(p12);
+        pokemonDB.criarPokemon(p13);
+        pokemonDB.criarPokemon(p14);
+        pokemonDB.criarPokemon(p15);
+        pokemonDB.criarPokemon(p16);
+        pokemonDB.criarPokemon(p17);
+        pokemonDB.criarPokemon(p18);
+        pokemonDB.criarPokemon(p19);
+        pokemonDB.criarPokemon(p20);
+        pokemonDB.criarPokemon(p21);
+        pokemonDB.criarPokemon(p22);
+        pokemonDB.criarPokemon(p23);
+        pokemonDB.criarPokemon(p24);
+        pokemonDB.criarPokemon(p25);
+        pokemonDB.criarPokemon(p26);
+        pokemonDB.criarPokemon(p27);
+        pokemonDB.criarPokemon(p28);
+        pokemonDB.criarPokemon(p29);
+        pokemonDB.criarPokemon(p30);
+
+
+
+    }
+
+
 }
