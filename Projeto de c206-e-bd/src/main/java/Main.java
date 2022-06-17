@@ -137,16 +137,17 @@ public class Main {
 
         }
 
-//        Pokemon p1 = new Pokemon(1,"Bulbasaur","Grama",2);
-//        Pokemon p2 = new Pokemon(2,"Ivysaur","Grama",2);
-
+//        Pokemon p1 = new Pokemon(1,"Bulbasaur","Grama",1);
+//        Pokemon p2 = new Pokemon(2,"Ivysaur","Grama",1);
+//
 //        Pokemon p3 = new Pokemon(3,"Venusaur","Grama",2);
 //        Pokemon p4 = new Pokemon(4,"Charmander","Fogo",2);
 //
 //        Pokemon p5 = new Pokemon(5,"Charmeleon","Fogo",3);
 //        Pokemon p6 = new Pokemon(6,"Charizard","Fogo",3);
 //
-//
+//        pokemonDB.criarPokemon(p1);
+//        pokemonDB.criarPokemon(p2);
 //        pokemonDB.criarPokemon(p3);
 //        pokemonDB.criarPokemon(p4);
 //        pokemonDB.criarPokemon(p5);
