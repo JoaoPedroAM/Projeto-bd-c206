@@ -41,8 +41,8 @@ CREATE TABLE IF NOT EXISTS `projeto`.`pokemon` (
   CONSTRAINT `fk_pokemon_local`
     FOREIGN KEY (`local_idlocal`)
     REFERENCES `projeto`.`local` (`idlocal`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 

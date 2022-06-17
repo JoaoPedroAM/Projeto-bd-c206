@@ -1,5 +1,5 @@
 package Database;
-import pokemon.Pokemon;
+import Pokemon.Pokemon;
 
 import java.sql.*;
 import java.util.ArrayList;
