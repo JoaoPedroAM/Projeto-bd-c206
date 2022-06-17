@@ -15,7 +15,6 @@ public class Main {
         PokedexDB pokedexDB = new PokedexDB();
 
         int save = 0;
-
         Scanner sc = new Scanner(System.in);
 
         boolean flagSave = true;
@@ -50,7 +49,13 @@ public class Main {
                         break;
                     case 2:
                         auxIDSave = sc.nextInt();
-                        pokedexDB.criarPokedex(auxIDSave);
+                        if(auxIDSave <=0 || auxIDSave > 10){
+                            System.out.println("ERRO!!!" +
+                                    "Limite de 10 saves, de 1 ate 10");
+                        }
+                        else {
+                            pokedexDB.criarPokedex(auxIDSave);
+                        }
                         break;
                     case 3:
                         auxIDSave = sc.nextInt();
@@ -208,6 +213,12 @@ public class Main {
 
 
     }
+
+
+
+
+
+
 
     public static void cacar(int auxCacar, int save, int local, int max, int min) {
 
