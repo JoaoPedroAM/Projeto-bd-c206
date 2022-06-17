@@ -64,51 +64,7 @@ public class LocalDB extends Connection {
         return pokemons;
     }
 
-    // ----------------------------ATUALIZANDO CIDADE----------------------------
-    public boolean atualizarCidade(int id, String nome){
-        connect();
-        String sql = "UPDATE local SET nome=? WHERE idlocal=?";
-        try{
-            pst = connection.prepareStatement(sql);
-            pst.setString(1, nome);
-            pst.setInt(2, id);
-            pst.execute();
-            check = true;
-        }catch (SQLException e){
-            System.out.println("Erro de operação: " + e.getMessage());
-            check = false;
-        }finally {
-            try {
-                connection.close();
-                pst.close();
-            }catch (SQLException e) {
-                System.out.println("Erro ao fechar a conexão: " + e.getMessage());
-            }
-        }
-        return check;
-    }
 
-    // ----------------------------EXCLUINDO REGISTRO----------------------------
-    public boolean deletarCidade(int id) {
-        connect();
-        String sql = "DELETE FROM local WHERE idlocal = " + id;
-        try{
-            pst = connection.prepareStatement(sql);
-            pst.execute();
-            check = true;
-        }catch (SQLException e){
-            System.out.println("Erro de operação: " + e.getMessage());
-            check = false;
-        }finally {
-            try {
-                connection.close();
-                pst.close();
-            }catch (SQLException e){
-                System.out.println("Erro ao fechar a conexão: " + e.getMessage());
-            }
-        }
-        return check;
-    }
 
 
 }

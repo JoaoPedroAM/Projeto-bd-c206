@@ -10,7 +10,7 @@ public abstract class Connection {
     PreparedStatement pst;   // objeto responsável por preparar querys de manipulação dinâmicas (INSERT, UPDATE, DELETE)
 
     static final String user = "root";
-    static final String password = "Lfcf210102";
+    static final String password = "root";
     static final String database = "Projeto";
 
     //String para conexão do banco de dados
@@ -24,7 +24,7 @@ public abstract class Connection {
             //System.out.println("Conexão concluida: " + connection);
 
         }catch (SQLException e){
-            System.out.println("ERRO DE CONEXÃO: " + e.getMessage());
+            System.out.println("ERRO DE CONEXÃO: SENHA ERRADA");
         }
     }
 
