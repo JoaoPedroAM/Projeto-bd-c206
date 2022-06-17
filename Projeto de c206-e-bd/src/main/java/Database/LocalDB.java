@@ -41,7 +41,7 @@ public class LocalDB extends Connection {
             statement = connection.createStatement();
             result = statement.executeQuery(sql);
             while(result.next()){
-                Pokemon pokemonTemp = new Pokemon(result.getInt("idpokemon"), result.getString("nome"), result.getString("tipo"),result.getInt("lvl"),result.getBoolean("shiny"),result.getBoolean("possui"),result.getInt("local_idlocal")) {
+                Pokemon pokemonTemp = new Pokemon(result.getInt("idpokemon"), result.getString("nome"), result.getString("tipo"),result.getInt("local_idlocal")) {
                 };
                 pokemonTemp.setId(result.getInt("idpokemon"));
                 System.out.println("ID = " + pokemonTemp.getId());
@@ -109,5 +109,6 @@ public class LocalDB extends Connection {
         }
         return check;
     }
+
 
 }

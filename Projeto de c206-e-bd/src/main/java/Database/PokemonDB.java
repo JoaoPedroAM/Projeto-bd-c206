@@ -9,16 +9,13 @@ public class PokemonDB extends Connection{
     // ------------------------- CRIAR POKEMON ----------------------------
     public boolean criarPokemon(Pokemon pokemon){
         connect();
-        String sql = "INSERT INTO Pokemon(idpokemon, nome, tipo , lvl, shiny, possui, local_idlocal) VALUES(?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Pokemon(idpokemon, nome, tipo , local_idlocal) VALUES(?, ?, ?, ?)";
         try {
             pst = connection.prepareStatement(sql);
             pst.setInt(1,pokemon.getId());      // concatena nome na primeira ? do comando
             pst.setString(2,pokemon.getNome());
             pst.setString(3,pokemon.getTipo());   // concatena nome na segunda ? do comando;
-            pst.setInt(4,pokemon.getLvl());
-            pst.setBoolean(5,pokemon.isShiny());
-            pst.setBoolean(6,pokemon.isPossui());
-            pst.setInt(7,pokemon.getLocal_idlocal());
+            pst.setInt(4,pokemon.getLocal_idlocal());
             pst.execute();                           // executa o comando
             check = true;
         } catch (SQLException e) {
@@ -45,7 +42,7 @@ public class PokemonDB extends Connection{
             statement = connection.createStatement();
             result = statement.executeQuery(sql);
             while(result.next()){
-                Pokemon pokemonTemp = new Pokemon(result.getInt("id"), result.getString("nome"), result.getString("tipo"),result.getInt("lvl"),result.getBoolean("shiny"),result.getBoolean("possui"), result.getInt("local_idlocal")) {
+                Pokemon pokemonTemp = new Pokemon(result.getInt("id"), result.getString("nome"), result.getString("tipo"),result.getInt("local_idlocal")) {
                 };
                 pokemonTemp.setId(result.getInt("id"));
                 System.out.println("ID = " + pokemonTemp.getId());
@@ -68,26 +65,21 @@ public class PokemonDB extends Connection{
         return pokemons;
     }
 
-    // ------------------------- BUSCANDO POKEMONS QUE POSSUI ----------------------------
-    public ArrayList<Pokemon> buscarSeusPokemons(){
+    // -------------------- BUSCAR POKEMON ID -----------
+    public ArrayList<Pokemon> buscarPokemonID(int id){
         connect();
         ArrayList<Pokemon> pokemons = new ArrayList<>();
-        String sql = "SELECT * FROM Pokemon WHERE possui = true" ;
+        String sql = "SELECT * FROM Pokemon WHERE idpokemon = " + id;
         try{
             statement = connection.createStatement();
             result = statement.executeQuery(sql);
             while(result.next()){
-                Pokemon pokemonTemp = new Pokemon(result.getInt("idpokemon"), result.getString("nome"), result.getString("tipo"),result.getInt("lvl"),result.getBoolean("shiny"),result.getBoolean("possui"),result.getInt("local_idlocal")) {
+                Pokemon pokemonTemp = new Pokemon(result.getInt("idpokemon"), result.getString("nome"), result.getString("tipo"),result.getInt("local_idlocal")) {
                 };
                 pokemonTemp.setId(result.getInt("idpokemon"));
                 System.out.println("ID = " + pokemonTemp.getId());
                 System.out.println("NOME = " + pokemonTemp.getNome());
                 System.out.println("TIPO = " + pokemonTemp.getTipo());
-                System.out.println("LEVEL = " + pokemonTemp.getLvl());
-                if (pokemonTemp.isShiny()) {
-                    System.out.println("O POKEMON É SHINY PARABENS ");
-                }else
-                    System.out.println("Não é shiny" );
                 System.out.println("------------------------------");
                 pokemons.add(pokemonTemp);
             }
