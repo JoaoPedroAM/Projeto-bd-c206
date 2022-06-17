@@ -80,7 +80,6 @@ public class PokemonDB extends Connection{
                 System.out.println("ID = " + pokemonTemp.getId());
                 System.out.println("NOME = " + pokemonTemp.getNome());
                 System.out.println("TIPO = " + pokemonTemp.getTipo());
-                System.out.println("------------------------------");
                 pokemons.add(pokemonTemp);
             }
         }catch (SQLException e){
