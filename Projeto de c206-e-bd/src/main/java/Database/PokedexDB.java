@@ -13,16 +13,16 @@ public class PokedexDB extends Connection{
     Scanner sc = new Scanner(System.in);
 
     // ------------------------- CRIAR POKEDEX ----------------------------
-    public boolean criarPokedex(Pokedex pokedex){
+    public boolean criarPokedex(int id){
         connect();
-        String sql = "INSERT INTO Pokemon(idpokedex) VALUES(?)";
+        String sql = "INSERT INTO Pokedex(idpokedex) VALUES(?)";
         try {
             pst = connection.prepareStatement(sql);
-            pst.setInt(1,pokedex.getIdPokedex());
+            pst.setInt(1,id);
             pst.execute();
             check = true;
         } catch (SQLException e) {
-            System.out.println("Erro de operação: " + e.getMessage());
+            System.out.println("Esse ID para save ja existe ");
             check = false;
         }
         finally {
@@ -37,15 +37,15 @@ public class PokedexDB extends Connection{
     }
 
     // ------------------------- EXCLUINDO POKEDEX ----------------------------
-    public boolean deletarCidade(int id) {
+    public boolean deletarSave(int id) {
         connect();
-        String sql = "DELETE FROM local WHERE idlocal = " + id;
+        String sql = "DELETE FROM pokedex WHERE idpokedex = " + id;
         try{
             pst = connection.prepareStatement(sql);
             pst.execute();
             check = true;
         }catch (SQLException e){
-            System.out.println("Erro de operação: " + e.getMessage());
+            System.out.println("Esse save nao existe ");
             check = false;
         }finally {
             try {

@@ -14,23 +14,44 @@ public class Main {
         PokemonDB pokemonDB = new PokemonDB();
         PokedexDB pokedexDB = new PokedexDB();
 
-        int save;
-
+        int save = 0;
 
         Scanner sc = new Scanner(System.in);
-
 
         boolean flagSave = true;
         System.out.println("BOM DIA caçador de pokemons !!!");
         System.out.println("Pronto para completar a sua Pokedex ???");
         System.out.println("");
-        System.out.println("Selecione o save: ");
         System.out.println("");
 
         while (flagSave) {
-            while (true) {
-                pokedexDB.buscarPokedex();
-                int auxSave;
+                int auxSave = 0;
+                boolean auxMenu = true;
+                while(auxMenu) {
+                    pokedexDB.buscarPokedex();
+                    System.out.println("1 - Carregar save");
+                    System.out.println("2 - Criar save");
+                    System.out.println("3 - Deletar save");
+                    System.out.println("≠ - Sair do jogo");
+                    auxSave = sc.nextInt();
+                    int auxIDSave;
+                    switch (auxSave) {
+                        case 1:
+                            System.out.println("Selecione o save: ");
+                            auxMenu = false;
+                            break;
+                        case 2:
+                            auxIDSave = sc.nextInt();
+                            pokedexDB.criarPokedex(auxIDSave);
+                            break;
+                        case 3:
+                            auxIDSave = sc.nextInt();
+                            pokedexDB.deletarSave(auxIDSave);
+                            break;
+                        default:
+                            break;
+                    }
+
                 System.out.println("------>");
                 save = sc.nextInt();
                 if (save >= 1 && save <= 3) {
@@ -42,14 +63,14 @@ public class Main {
 
             boolean flagMenu = true;
             while (flagMenu) {
-                int auxMenu;
+                int auxMenu2 = 0;
                 System.out.println("1 - Mostrar seus pokemons:");
                 System.out.println("2 - Escolher local de captura de pokemons:");
                 System.out.println("3 - Escolher outro save");
                 System.out.println("------>");
-                auxMenu = sc.nextInt();
+                auxMenu2 = sc.nextInt();
 
-                switch (auxMenu) {
+                switch (auxMenu2) {
                     case 1:
                         pokedexDB.buscarSeusPokemons(save);
                         break;
@@ -75,7 +96,7 @@ public class Main {
                                     auxCacar = sc.nextInt();
                                     switch (auxCacar) {
                                         case 1:
-                                            cacar(auxCacar, save, local,2,1);
+                                            cacar(auxCacar, save, local, 2, 1);
                                             break;
                                         case 2:
                                             System.out.println("Cidade de Pallet é uma pequena cidade localizada à sudoeste na Região de Kanto");
@@ -94,7 +115,7 @@ public class Main {
                                     auxCacar = sc.nextInt();
                                     switch (auxCacar) {
                                         case 1:
-                                            cacar(auxCacar, save, local,4,3);
+                                            cacar(auxCacar, save, local, 4, 3);
                                             break;
                                         case 2:
                                             System.out.println("Vermilion City é uma cidade portuária localizada ao sul de Saffron e localizada na parte central de Kanto");
@@ -113,7 +134,7 @@ public class Main {
                                     auxCacar = sc.nextInt();
                                     switch (auxCacar) {
                                         case 1:
-                                            cacar(auxCacar, save, local,6,5);
+                                            cacar(auxCacar, save, local, 6, 5);
                                             break;
                                         case 2:
                                             System.out.println("Lavender Town é localizada na parte Leste de Kanto e conhecida por causa da Pokémon Tower e seu cemiterio");
@@ -132,8 +153,12 @@ public class Main {
                                     break;
                             }
                         }
+                    case 3:
+                        flagMenu = false;
+                        break;
                 }
-            }
+                }
+
 
         }
 
