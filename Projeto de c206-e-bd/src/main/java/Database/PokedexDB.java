@@ -6,8 +6,11 @@ import pokemon.PokemonPossuido;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class PokedexDB extends Connection{
+
+    Scanner sc = new Scanner(System.in);
 
     // ------------------------- CRIAR POKEDEX ----------------------------
     public boolean criarPokedex(Pokedex pokedex){
@@ -131,16 +134,34 @@ public class PokedexDB extends Connection{
         String sql = "INSERT INTO pokemon_da_pokedex(pokedex_idpokedex, pokemon_idpokemon,pokemon_local_idlocal, pokemon_lvl, pokemon_shiny) VALUES(?, ?, ?, ?, ?)";
         try {
             pst = connection.prepareStatement(sql);
+            pokemonDB.buscarPokemonID(id);
+            System.out.println("LVL = " + lvl);
+            if(shiny == true){
+                System.out.println("PARABENSSS É SINHIII KARAI !!!!! 1 em 1000 desgraca");
+            }
+            else {
+
+            }
             pst.setInt(1,save);      // concatena nome na primeira ? do comando
             pst.setInt(2,id);
             pst.setInt(3,local);   // concatena nome na segunda ? do comando;
             pst.setInt(4,lvl);
             pst.setBoolean(5,shiny);
-            pokemonDB.buscarPokemonID(id);
             pst.execute();
             check = true;
         } catch (SQLException e) {
-            System.out.println("Erro de operação: " + e.getMessage());
+            int aux = 0;
+            System.out.println("Esse pokemon ja foi encontrado, gostaria de substituilo?");
+            System.out.println("1 - sim");
+            System.out.println("≠ - nao");
+            aux = sc.nextInt();
+            switch (aux){
+                case 1:
+                    trocarPokemon(id,save,lvl,shiny);
+                    break;
+                default:
+                    break;
+            }
             check = false;
         }
         finally {
@@ -148,7 +169,33 @@ public class PokedexDB extends Connection{
                 connection.close();
                 pst.close();
             }catch (SQLException e){
-                System.out.println("Esse pokemon ja foi encontrado, so lamento");
+                System.out.println("Erro de operação: " + e.getMessage());
+            }
+        }
+        return check;
+    }
+
+    // --------------------------ATUALIZANDO POKEMON----------------------------
+    public boolean trocarPokemon(int id,int save,int lvl, boolean shiny){
+        connect();
+        String sql = "UPDATE pokemon_da_pokedex SET pokemon_lvl = ?, pokemon_shiny = ? WHERE pokemon_idpokemon=? and pokedex_idpokedex = ?; ";
+        try{
+            pst = connection.prepareStatement(sql);
+            pst.setInt(1, lvl);
+            pst.setBoolean(2, shiny);
+            pst.setInt(3, id);
+            pst.setInt(4, save);
+            pst.execute();
+            check = true;
+        }catch (SQLException e){
+            System.out.println("Erro de operação: " + e.getMessage());
+            check = false;
+        }finally {
+            try {
+                connection.close();
+                pst.close();
+            }catch (SQLException e) {
+                System.out.println("Erro ao fechar a conexão: " + e.getMessage());
             }
         }
         return check;
